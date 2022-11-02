@@ -22,14 +22,12 @@ try:
             INSERT INTO pessoa 
             (nome, email, profissao, hooby)
             VALUES
-            ('Maria', 'maria@gmail.com', 'Assistente Social', 'Colorir');
+            ('Luan', 'luan@gmail.com', 'Psicólogo', 'Pedalar');
             """
         cursor.execute(query)
         connection.commit()  #serve para casos de create
 
         dado = cursor.fetchall()
-
-
 
 
 

@@ -1,9 +1,10 @@
 import mysql.connector
 from mysql.connector import Error
+import pandas as pd
 
 banco = {
     "host": "localhost",
-    "db": "financas",
+    "db": "testes",
     "user": "root",
     "password": ""
 }
@@ -22,9 +23,14 @@ try:
         cursor.execute(query)
         # connection.commit()  #serve para casos de create
 
-        dado = cursor.fetchall()
+        valores = cursor.fetchall()   #fetchall armazena dados em uma lista de tuplas
 
+        descricao = cursor.description
+        colunas = [nome[0] for nome in descricao]  # ideia de LIST COMPREHENSION
 
+        tabela = pd.DataFrame.from_records(valores, columns=colunas)  #ideia do display no Jupyter
+
+        print(tabela)
 
 
 except Error as e:

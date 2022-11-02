@@ -1,0 +1,34 @@
+import mysql.connector
+from mysql.connector import Error
+import pandas as pd
+import sqlite3
+
+banco = {
+    "host": "localhost",
+    "db": "testes",
+    "user": "root",
+    "password": ""
+}
+
+try:
+
+    connection = mysql.connector.connect(host=banco["host"],
+                                         database=banco["db"],
+                                         user=banco["user"],
+                                         password=banco["password"]
+                                         )
+    if connection.is_connected():
+        cursor = connection.cursor()
+
+        tabela = pd.read_sql("SELECT * FROM pessoa;", connection)  #forma de ler com o pandas um SQL
+
+
+except Error as e:
+    print("Erro na conexao", e)
+
+
+finally:
+    if connection.is_connected():
+        cursor.close()
+        connection.close()
+        print("Conexão com banco encerrada.")
