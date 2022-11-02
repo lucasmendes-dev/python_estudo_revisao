@@ -5,7 +5,7 @@ banco = {
     "host": "localhost",
     "db": "financas",
     "user": "root",
-    "password": "Easy976020-1"
+    "password": ""
 }
 
 try:
