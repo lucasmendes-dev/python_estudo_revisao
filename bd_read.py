@@ -25,7 +25,7 @@ try:
 
         valores = cursor.fetchall()   #fetchall armazena dados em uma lista de tuplas
 
-        descricao = cursor.description
+        descricao = cursor.description  #nome das colunas
         colunas = [nome[0] for nome in descricao]  # ideia de LIST COMPREHENSION
 
         tabela = pd.DataFrame.from_records(valores, columns=colunas)  #ideia do display no Jupyter
