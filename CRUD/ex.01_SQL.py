@@ -1,7 +1,7 @@
 import pandas as pd
 import sqlite3
 
-conexao = sqlite3.connect('salarios.sqlite')
+conexao = sqlite3.connect('../salarios.sqlite')
 
 query = "SELECT * FROM Salaries;"
 tabela_salarios = pd.read_sql(query, conexao)
