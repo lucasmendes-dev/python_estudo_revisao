@@ -3,7 +3,7 @@ from mysql.connector import Error
 
 banco = {
     "host": "localhost",
-    "db": "financas",
+    "db": "testes",
     "user": "root",
     "password": ""
 }
@@ -18,11 +18,12 @@ try:
     if connection.is_connected():
         cursor = connection.cursor()
 
-        query = "Select * from teste;"
+        query = "Select * from pessoa;"
         cursor.execute(query)
         # connection.commit()  #serve para casos de create
 
         dado = cursor.fetchall()
+        print(dado)
 
 
         # coluna = cursor.description  #pega o nome das colunas do Banco
