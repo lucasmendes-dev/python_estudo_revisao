@@ -1,3 +1,5 @@
+#iniciando estudo classes
+
 class TV:
 
     cor = "Preta"
