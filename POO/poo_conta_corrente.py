@@ -4,6 +4,19 @@ import pytz
 
 class ContaCorrente:
 
+    """_summary_
+        Cria um objeto ContaCorrente para gerenciar as contas dos clientes.
+        
+    Atributos:
+        nome (str): Nome do cliente.
+        cpf (str): Cpf do cliente.
+        saldo (int): Saldo disponível na conta do cliente.
+        limite (int): Limite de Cheque Especial daquele cliente.
+        agencia(int): Agência responsável pela conta do cliente.
+        num_conta (int): Número da conta corrente do cliente.
+        transacoes (arr): Histórico de transacoes do cliente.
+    """
+
     @staticmethod
     def _data_hora():   #método "estático", não precisa ter self e fica acima do __init__
         fuso_BR = pytz.timezone("Brazil/East")
