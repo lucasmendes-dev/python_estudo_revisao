@@ -1,5 +1,6 @@
 from datetime import datetime
 import pytz
+from random import randint   
 
 
 class ContaCorrente:
@@ -15,6 +16,7 @@ class ContaCorrente:
         agencia(int): Agência responsável pela conta do cliente.
         num_conta (int): Número da conta corrente do cliente.
         transacoes (arr): Histórico de transacoes do cliente.
+        cartoes (arr): Armazena os cartões de crédito do cliente.
     """
 
     @staticmethod
@@ -28,9 +30,10 @@ class ContaCorrente:
         self._cpf = cpf
         self._saldo = 0
         self._limite = None
-        self._agencia = agencia
-        self._num_conta = num_conta
+        self.agencia = agencia
+        self.num_conta = num_conta
         self._transacoes = []
+        self.cartoes = []
 
     def consultar_saldo(self):
         print(f"Seu saldo atual é de R${self._saldo:.2f}")
@@ -64,26 +67,45 @@ class ContaCorrente:
         self._transacoes.append((-valor, self._saldo, ContaCorrente._data_hora()))
         conta_destino.saldo += valor
         conta_destino._transacoes.append((-valor, conta_destino.saldo, ContaCorrente._data_hora()))
-        
+    
+    
+class CartaoCredito:
+    
+    @staticmethod
+    def _data_hora():   
+        fuso_BR = pytz.timezone("Brazil/East") 
+        horario_BR = datetime.now(fuso_BR)
+        return horario_BR
+    
+    def __init__(self, titular, conta_corrente):
+        self.numero = randint(1000000000000000, 9999999999999999)
+        self.titular = titular
+        self.validade = "{}/{}".format(CartaoCredito._data_hora().month, CartaoCredito._data_hora().year + 4)  #formatando data e ano
+        self.cod_seguranca = "{}{}{}".format(randint(0, 9), randint(0, 9), randint(0, 9))
+        self.limite = 1000
+        self._senha = "1234"
+        self.conta_corrente = conta_corrente
+        conta_corrente.cartoes.append(self)    #adiciona a classe CartaoCredito no atributo "_cartoes" da classe ContaCorrente
 
+    @property   #transforma a função em um atributo
+    def senha(self):
+        return self._senha
+    
+    @senha.setter   #definir a senha
+    def senha(self, valor):
+        if len(valor) == 4 and valor.isnumeric():
+            self._senha = valor
+        else:
+            print("Nova senha inválida")
+    
+
+#início - programa
 conta = ContaCorrente("Lucas", "02080277693", 3610, 33794)
+cartao = CartaoCredito("Lucas", conta)
 
-conta.saldo = 500
-conta.consultar_saldo()
+#print(conta.cartoes[0].numero)  #forma de exibir um objeto dentro de outro
 
-conta.depositar(600)
-conta.consultar_saldo()
+cartao.senha = "12"    #não precisa mais do "_" para exibir ou alterar, pelo fato de usar o @property e @.setter
+print(cartao.senha)
 
-
-print("Saldo final")
-conta.consultar_limite_chequeEspecial()
-
-print("-" * 20)
-conta.consultar_historico_transacoes()
-
-print("-" * 20)
-conta_2 = ContaCorrente("Maria", "12345678900", 1234, 66584)
-conta.transferir(240, conta_2)
-
-conta.consultar_saldo()
-conta_2.consultar_saldo()
+print(conta.__dict__) #__dict__ serve para consultar os valores inseridos na classe

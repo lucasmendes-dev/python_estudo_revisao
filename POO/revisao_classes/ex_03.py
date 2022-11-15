@@ -12,17 +12,17 @@ aprovação.
 class Alunos:
     
     def __init__(self, matricula, nome, nota1, nota2, nota3):
-        self._matricula = matricula
-        self._nome = nome
-        self._nota1 = nota1
-        self._nota2 = nota2
-        self._nota3 = nota3
+        self.matricula = matricula
+        self.nome = nome
+        self.nota1 = nota1
+        self.nota2 = nota2
+        self.nota3 = nota3
         
     def mostrar_nome(self):
-        return self._nome
+        return self.nome
         
     def mostrar_media(self):
-        media = (self._nota1 + self._nota2 + self._nota3) / 3
+        media = (self.nota1 + self.nota2 + self.nota3) / 3
         return media
         
         

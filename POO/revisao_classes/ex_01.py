@@ -8,15 +8,15 @@
 class Pessoa:
     
     def __init__(self, nome, idade, endereco):
-        self._nome = nome
-        self._idade = idade
-        self._endereco = endereco
+        self.nome = nome
+        self.idade = idade
+        self.endereco = endereco
         
     def mostrar_endereco(self):
-        print(self._endereco)
+        print(self.endereco)
     
     def alterar_endereco(self, novo_endereco):
-        self._endereco = novo_endereco
+        self.endereco = novo_endereco
     
     
 lucas = Pessoa("Lucas", 25, "Rua Pr. Castelo Branco")
